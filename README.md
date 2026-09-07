@@ -4,7 +4,7 @@
 
 Một plugin Claude Code, ba lệnh. Nó trả lời đúng câu hỏi mà một bộ não đầy dữ liệu vẫn không tự trả lời được: **tháng này tôi nên làm gì trước.**
 
-> **Phiên bản:** `1.0.0` · 2026-09-07 · giấy phép MIT
+> **Phiên bản:** `1.1.0` · 2026-09-07 · giấy phép MIT
 
 ---
 
@@ -24,9 +24,9 @@ claude plugin install dieu-phoi
 |---|---|---|
 | `/banh-xe-cuoc-doi` | Chấm 8 khía cạnh cuộc sống → kế hoạch dài hạn + 90 ngày. **Nạp con người**, không nạp dữ liệu việc | 3 tháng |
 | `/kham-benh` | Soi bạn đang tắc ở khâu nào — ~22 ô, kê đơn hai ngăn | 3 tháng |
-| `/tong-giam-doc` | Đọc bản khám gần nhất → chốt **một** việc cho tháng → nghiệm thu bằng hai con số | mỗi tháng |
+| `/ke-hoach-thang` | Đọc bản khám gần nhất → chốt **một** việc cho tháng → nghiệm thu bằng hai con số | mỗi tháng |
 
-⚠️ **`/tong-giam-doc` không tự khám** — nó gọi `/kham-benh`. Hai bộ khám là hai kết quả khác nhau cho cùng một người, và **không có gì báo khi chúng lệch**.
+⚠️ **`/ke-hoach-thang` không tự khám** — nó gọi `/kham-benh`. Hai bộ khám là hai kết quả khác nhau cho cùng một người, và **không có gì báo khi chúng lệch**.
 
 ## ⚙️ Máy giữ chỗ, không phải AI giữ chỗ
 
@@ -47,7 +47,7 @@ git clone https://github.com/creator-ceo/nhan-su-thu-thu.git
 | Lớp | Skill | Ở đâu |
 |---|---|---|
 | Bộ khung bộ não thứ 2 | `/onboard` · `/nap-kho` · `/kiem-chung` | kho `nhan-su-thu-thu` — **cài trước** |
-| Vai Điều phối | `/banh-xe-cuoc-doi` · `/kham-benh` · `/tong-giam-doc` | **kho này** |
+| Vai Điều phối | `/banh-xe-cuoc-doi` · `/kham-benh` · `/ke-hoach-thang` | **kho này** |
 
 Chưa chạy `/onboard` thì chưa có gì để điều phối. Vai này vẫn khám được, nhưng bản đề xuất không có chỗ để ghi vào — và lời khuyên sẽ chung chung vì nó không biết bạn bán gì cho ai.
 
@@ -61,7 +61,7 @@ Chưa chạy `/onboard` thì chưa có gì để điều phối. Vai này vẫn 
 | 💰 Bán hàng | `creator-ceo/nhan-su-ban-hang` | 🟡 đang đóng gói |
 | 🎨 Thiết kế · 🤝 Chăm sóc · 🔍 Nghiên cứu | — | ⬜ chưa |
 
-⚠️ **Bảng giao việc của `/tong-giam-doc` nói thẳng vai nào chưa có.** Gặp việc thuộc vai chưa phát, nó bảo bạn **làm tay hoặc chọn quy trình khác** — không gọi một lệnh không tồn tại, và không ép sang vai gần đúng nhất.
+⚠️ **Bảng giao việc của `/ke-hoach-thang` nói thẳng vai nào chưa có.** Gặp việc thuộc vai chưa phát, nó bảo bạn **làm tay hoặc chọn quy trình khác** — không gọi một lệnh không tồn tại, và không ép sang vai gần đúng nhất.
 
 ---
 
