@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Vai Điều phối trong đội nhân sự A.I của Tô Hải Đoàn — cài rời, chạy trên bộ não thứ 2 sẵn có",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "repository": "https://github.com/creator-ceo/nhan-su-dieu-phoi"
   },
   "plugins": [

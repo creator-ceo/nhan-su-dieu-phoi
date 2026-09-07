@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "dieu-phoi",
   "displayName": "Nhân sự Điều phối",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Vai Điều phối trong đội nhân sự A.I — bánh xe cuộc đời, khám nút thắt kinh doanh, rồi chốt MỘT việc cho tháng và nghiệm thu bằng hai con số. Máy giữ chỗ bài khám: nhả đúng một ô mỗi lượt nên AI không đổ cả bài ra, không nhảy cóc, không tự chấm.",
   "author": {
     "name": "Tô Hải Đoàn"
