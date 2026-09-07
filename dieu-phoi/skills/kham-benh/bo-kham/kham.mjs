@@ -36,38 +36,46 @@ import { docNutThat } from './doc-nut-that.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-/* ── BA KIỂU CÀI, VÀ CHỖ NÀY LÀ CHỖ PHÂN BIỆT ─────────────────────────────
+/* ── BỐN KIỂU CÀI, VÀ CHỖ NÀY LÀ CHỖ PHÂN BIỆT ────────────────────────────
  *
- *   ① `owner-os/` của Đoàn   — HERE có `nap/`, cha của HERE là kho
- *   ② thư mục clone về       — cha của HERE là kho              (bản v2.9)
- *   ③ PLUGIN                 — HERE nằm ở ~/.claude/plugins/…, KHÔNG dính gì tới kho
+ *   ① `owner-os/` của Đoàn   — cha của HERE là kho (có `wiki/`)
+ *   ② thư mục clone về       — cha của HERE là gốc bộ khung (có `CLAUDE.md`)
+ *   ③ PLUGIN                 — HERE ở ~/.claude/plugins/…, cha là `skills/kham-benh/`
+ *   ④ BẢN GỘP                — HERE ở `<kho>/.claude/skills/kham-benh/bo-kham/`
  *
- * Kiểu ③ thêm 2026-09-07 lúc đóng gói vai Điều phối. Nhận ra bằng biến môi trường
- * `CLAUDE_PLUGIN_ROOT` — Claude Code chỉ đặt nó khi đang chạy trong một plugin.
+ * ⚠️ KHÔNG hỏi biến môi trường để phân biệt. Bản đầu của mục này dùng
+ *    `CLAUDE_PLUGIN_ROOT` — chạy đúng ở ③ nhưng GÃY Ở ④, vì bản gộp không phải
+ *    plugin nên biến đó rỗng. Bắt được lúc thử thật, không phải lúc đọc code.
  *
- * ⚠️ HAI THỨ HỎNG NẾU KHÔNG PHÂN BIỆT, và cái thứ hai ăn mất dữ liệu người dùng:
+ * Phép hỏi đúng không phải "tôi đang chạy trong cái gì" mà là **"cha tôi có
+ * phải một cái kho không"**. Câu đó tự trả lời được, không cần ai khai.
  *
- *   1. `GOC` suy từ `HERE/..` sẽ trỏ vào `skills/kham-benh/` chứ không phải kho,
- *      nên bản đề xuất ghi ra một chỗ người dùng không bao giờ tìm thấy.
+ * HAI THỨ HỎNG NẾU ĐOÁN SAI, và cái thứ hai ăn mất dữ liệu người dùng:
  *
- *   2. `KHAM_DIR` nằm trong HERE là nằm TRONG THƯ MỤC PLUGIN. Bài khám có ~22 ô,
- *      lưu sau mỗi lượt — mà `claude plugin update` thay cả thư mục đó. Ai đang
- *      khám dở, cập nhật một cái là mất sạch câu đã trả lời, KHÔNG CÓ GÌ BÁO.
- *      Câu trả lời là dữ liệu CỦA HỌ nên ghi vào kho của họ, không ghi vào
- *      `CLAUDE_PLUGIN_DATA` — chỗ đó hợp với cache, không hợp với thứ họ phải
- *      nhìn thấy và phải còn lại sau khi gỡ plugin.
+ *   1. `GOC` trỏ vào `skills/kham-benh/` thay vì kho → bản đề xuất ghi ra một
+ *      chỗ người dùng không bao giờ tìm thấy.
+ *
+ *   2. `KHAM_DIR` nằm trong HERE là nằm TRONG GÓI. Bài khám ~22 ô, lưu sau mỗi
+ *      lượt, mà `claude plugin update` thay cả thư mục đó. Ai đang khám dở,
+ *      cập nhật một cái là mất sạch, KHÔNG CÓ GÌ BÁO. Câu trả lời là dữ liệu
+ *      CỦA HỌ nên ghi vào kho của họ — không ghi vào `CLAUDE_PLUGIN_DATA`, chỗ
+ *      đó hợp với cache chứ không hợp với thứ họ phải nhìn thấy và phải còn
+ *      lại sau khi gỡ plugin.
  */
-const LA_PLUGIN = !!process.env.CLAUDE_PLUGIN_ROOT;
-const GOC = LA_PLUGIN ? process.cwd() : path.resolve(HERE, '..');   // thư mục chứa `wiki/`
+const laKho = (d) => fs.existsSync(path.join(d, 'wiki')) || fs.existsSync(path.join(d, 'CLAUDE.md'));
+const CHA = path.resolve(HERE, '..');
+const TRONG_KHO = laKho(CHA);                       // ① ② — nằm ngay trong kho người dùng
+const GOC = TRONG_KHO ? CHA : process.cwd();        // ③ ④ — đứng ngoài, lấy thư mục đang chạy
 const coFile = (...p) => { const f = path.join(...p); return fs.existsSync(f) ? f : null; };
 const NAP_DIR = coFile(HERE, 'nap') || path.join(GOC, 'kham-ra');   // Đoàn: owner-os/nap · còn lại: kho/kham-ra/
 /* Lệnh in ra cho người ta gõ lại phải là đường dẫn THẬT của chỗ đang chạy. Đóng cứng
    `owner-os/kham.mjs` thì bản phát cho member bảo họ gõ một lệnh không tồn tại — hỏng kiểu
-   chỉ lộ ra ở máy người khác. Bản plugin thì đường dẫn tương đối vô nghĩa (nó xuyên qua
-   ~/.claude/plugins), nên in đúng dạng biến mà người ta gõ được. */
-const LENH = LA_PLUGIN
-  ? 'node "${CLAUDE_PLUGIN_ROOT}/skills/kham-benh/bo-kham/kham.mjs"'
-  : `node ${path.relative(process.cwd(), fileURLToPath(import.meta.url)) || 'kham.mjs'}`;
+   chỉ lộ ra ở máy người khác. Bản plugin thì đường dẫn tương đối xuyên qua ~/.claude/plugins
+   nên vô nghĩa; ở đó in đúng dạng biến mà người ta gõ được. */
+const tuong = path.relative(process.cwd(), fileURLToPath(import.meta.url));
+const LENH = (!tuong || tuong.startsWith('..'))
+  ? 'node "${CLAUDE_PLUGIN_ROOT}/skills/kham-benh/bo-kham/kham.mjs"'   // ngoài cây thư mục đang đứng → plugin
+  : `node ${tuong}`;
 const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 /* Chạy được ở HAI NƠI, tự nhận ra mình đang ở đâu — không cần bộ sinh vá chuỗi.
    • Creator OS của Đoàn: luật ở `os-map.json`, luật kê đơn ở manifest tính năng.
@@ -89,7 +97,7 @@ function docLuat() {
 }
 import { KHAM_LOI as KL } from './kham-loi.mjs';
 
-const KHAM_DIR = LA_PLUGIN ? path.join(GOC, 'kham-ra', 'phien') : path.join(HERE, 'kham');
+const KHAM_DIR = TRONG_KHO ? path.join(HERE, 'kham') : path.join(GOC, 'kham-ra', 'phien');
 const HOM_NAY = iso(new Date());
 
 /* ── phiên ─────────────────────────────────────────────── */
