@@ -4,7 +4,7 @@
 
 Một plugin Claude Code, ba lệnh. Nó trả lời đúng câu hỏi mà một bộ não đầy dữ liệu vẫn không tự trả lời được: **tháng này tôi nên làm gì trước.**
 
-> **Phiên bản:** `1.2.2` · 2026-09-13 · giấy phép MIT
+> **Phiên bản:** `1.2.3` · 2026-09-15 · giấy phép MIT
 
 ---
 
@@ -56,10 +56,12 @@ Chưa chạy `/onboard` thì chưa có gì để điều phối. Vai này vẫn 
 | Vai | Kho | Trạng thái |
 |---|---|---|
 | 🧑‍🏫 **Thủ thư** — cái nền, cài trước tiên | `creator-ceo/nhan-su-thu-thu` | ✅ |
-| 🎛️ **Điều phối** | `creator-ceo/nhan-su-dieu-phoi` | ✅ **kho này** |
+| 🎛️ **Điều phối** *(Tổng giám đốc)* | `creator-ceo/nhan-su-dieu-phoi` | ✅ **kho này** |
 | ✍️ **Content** | `creator-ceo/nhan-su-content` | ✅ |
-| 💰 Bán hàng | `creator-ceo/nhan-su-ban-hang` | 🟡 đang đóng gói |
-| 🎨 Thiết kế · 🤝 Chăm sóc · 🔍 Nghiên cứu | — | ⬜ chưa |
+| 💰 **Bán hàng** | `creator-ceo/nhan-su-ban-hang` | ✅ |
+| 🔍 **Nghiên cứu** | `creator-ceo/nhan-su-nghien-cuu` | 🟡 bản tạm |
+| 🎨 **Thiết kế** | `creator-ceo/nhan-su-thiet-ke` | 🟡 bản tạm |
+| 🤝 **Chăm sóc** | `creator-ceo/nhan-su-cham-soc` | 🟡 bản tạm |
 
 ⚠️ **Bảng giao việc của `/dieu-hanh` nói thẳng vai nào chưa có.** Gặp việc thuộc vai chưa phát, nó bảo bạn **làm tay hoặc chọn quy trình khác** — không gọi một lệnh không tồn tại, và không ép sang vai gần đúng nhất.
 
