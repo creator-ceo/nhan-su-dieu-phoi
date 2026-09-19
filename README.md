@@ -4,7 +4,7 @@
 
 Một plugin Claude Code, ba lệnh. Nó trả lời đúng câu hỏi mà một bộ não đầy dữ liệu vẫn không tự trả lời được: **tháng này tôi nên làm gì trước.**
 
-> **Phiên bản:** `1.2.3` · 2026-09-15 · giấy phép MIT
+> **Phiên bản:** `1.2.4` · 2026-09-20 · giấy phép MIT
 
 ---
 
