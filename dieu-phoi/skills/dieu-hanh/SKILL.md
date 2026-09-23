@@ -40,6 +40,22 @@ Nửa dựng đã có bốn skill lo: `/onboard` dựng bộ não · `/nap-kho` 
 
 ---
 
+## Một vòng ba tháng: khám → chữa → tái khám
+
+Vai này chạy theo **vòng ba tháng**, không chạy rời từng tháng:
+
+| Lúc nào | Làm gì | Bằng lệnh nào |
+|---|---|---|
+| **Đầu vòng** | Khám ra khâu đang tắc, rồi chốt **hai số gốc của cả vòng** | `/kham-benh` khám, vai này ghi hai số |
+| **Mỗi tháng trong vòng** | Chữa **đúng một** quy trình, đi hết năm bước chữa | vai này — Việc 2 · 3 · 4 |
+| **Hết tháng thứ ba** | **Tái khám**: đo lại hai số, xem khâu gốc hết đỏ chưa, rồi mở vòng mới | `/kham-benh` lượt sau — Việc 5 |
+
+⚠️ **Cố định là cái NHỊP, không phải cái KHÂU.** Không xếp trước quý nào làm mảng nào. Khâu nào được chữa là do bản khám chỉ ra và người dùng chốt — ba người khác nhau sẽ chữa ba khâu khác nhau trong cùng một vòng.
+
+⚠️ **Hai số gốc của VÒNG khác hai số của THÁNG.** Số của vòng đo **cái khâu** *(giờ mỗi tuần bạn đích thân bỏ vào khâu đó · một con số kinh doanh của khâu đó)* và chỉ đo lại lúc tái khám. Số của tháng đo **một quy trình** và đo lại cuối tháng. Thiếu cặp số của vòng thì tái khám không có gì để so, chỉ còn cảm giác *"hình như đỡ hơn"*.
+
+---
+
 ## ⚠️ Hai nhánh ngược nhau — chọn sai nhánh là hỏng cả tháng
 
 Người ta cần hai việc **trái ngược nhau**, tuỳ họ đang ở đâu. Đây là quyết định đầu tiên của vai này, và cũng là chỗ dễ áp nhầm nhất.
@@ -110,7 +126,7 @@ Trước khi hỏi câu nào, **đọc bộ não để tự biết đang ở đ�
 | `wiki/nhip-thang.md` *(nếu có)* | Tháng gần nhất đã chốt quy trình nào, đã nghiệm thu chưa |
 | `wiki/goals.md` §số | Có số kinh doanh nào đang theo dõi không |
 
-Rồi chọn đúng một trong bốn việc dưới đây, **nói ra là đang làm việc nào và vì sao**:
+Rồi chọn đúng một trong năm việc dưới đây, **nói ra là đang làm việc nào và vì sao**:
 
 | Tình trạng đọc được | Làm việc nào |
 |---|---|
@@ -119,6 +135,7 @@ Rồi chọn đúng một trong bốn việc dưới đây, **nói ra là đang 
 | Đã có danh sách việc ăn giờ, tháng này chưa chốt quy trình | **Việc 2** — Chọn |
 | Đã chốt quy trình, đang giữa tháng | **Việc 3** — Giao và theo |
 | Cuối tháng, quy trình đã đi hết bốn tuần | **Việc 4** — Nghiệm thu |
+| Đã nghiệm thu đủ **ba tháng** của vòng, hoặc bản khám sắp quá 3 tháng | **Việc 5** — Tái khám, đóng vòng |
 
 ⚠️ **`nhip-thang.md` chưa tồn tại KHÔNG có nghĩa phải khám lại từ đầu.** Trang đó chỉ ghi nhịp tháng; bản khám sống ở `banh-xe-cuoc-doi.md` và ở trang soi chỗ tắc. Bắt người ta khám lại khi họ vừa khám hai tuần trước là làm phiền, và họ sẽ trả lời cho xong.
 
@@ -148,6 +165,13 @@ Vì sao dứt khoát: hai bộ khám là **hai kết quả khác nhau cho cùng 
 2. **Hỏi câu phân nhánh** — thứ bản khám thường KHÔNG có (xem cảnh báo ở Bước 0):
 
 > *"Một tuần bình thường của bạn, việc nào bạn làm đi làm lại bằng tay nhiều nhất? Kể ba đến năm việc, kèm ước lượng mỗi việc ngốn bao nhiêu giờ một tuần."*
+
+3. **Chốt hai số gốc của vòng** — đo cái khâu bản khám vừa chỉ ra, không đo quy trình:
+
+> *"Một tuần bạn đích thân bỏ khoảng bao nhiêu giờ vào khâu này?"*
+> *"Khâu này đang đo bằng con số kinh doanh nào, và hiện tại nó bao nhiêu?"*
+
+Ghi cả hai vào trang nhịp tháng ngay lúc này, kèm ngày. **Ba tháng nữa tái khám sẽ đo lại đúng hai số đó** — hỏi lại từ đầu lúc đó thì người ta chỉ nhớ áng chừng, và con số nhớ lại luôn đẹp hơn con số đo thật.
 
 **Đầu ra khác nhau theo nhánh:**
 
@@ -222,6 +246,20 @@ Thứ tự **bên trong** tuần mới là thứ giữ: viết ra trước, soi 
 
 ---
 
+## Việc 5 — Tái khám, đóng vòng *(hết tháng thứ ba)*
+
+🔴 **Vẫn KHÔNG tự khám. Gọi `/kham-benh`.** Chạy lượt mới, máy tự nhận ra có đơn cũ và tự hỏi phần tái khám.
+
+Việc của vai này ở đây là **bắc cầu**, ba bước:
+
+1. **Đo lại hai số gốc của vòng** — đúng hai số đã ghi ở Việc 1, không đổi cách đo giữa chừng. Đặt cạnh số cũ, để người ta tự thấy khoảng cách.
+2. **Đọc kết quả tái khám của máy.** Khâu gốc còn đỏ không. Nếu chưa đỡ, máy tách sẵn ba lý do — **chưa làm** · **làm rồi mà không ăn thua** · **chẩn nhầm từ đầu** — và ba thứ này chữa khác hẳn nhau, đừng gộp thành một câu *"tháng sau cố hơn"*.
+3. **Mở vòng mới.** Khâu mới do bản khám mới chỉ ra, có thể vẫn là khâu cũ. Chốt lại hai số gốc cho vòng tới, rồi quay về Việc 2.
+
+⚠️ **Ba tháng làm mà khâu gốc vẫn đỏ KHÔNG mặc nhiên là thất bại.** Ba quy trình đã tự chạy là ba quy trình thật, giờ đã giải phóng là giờ thật. Nhưng phải **nói thẳng ra** khâu gốc chưa chuyển, đừng lấy ba cái quy trình xong để lấp chỗ đó — người ta cần biết để chọn tiếp, không cần được an ủi.
+
+---
+
 ## Ghi kết quả vào bộ não
 
 Mọi việc trên **đều đi qua `/nap-kho`**, không tự sửa file trong `wiki/`. Đây là luật của cả bộ khung, không có ngoại lệ cho vai này.
@@ -242,6 +280,20 @@ Khuôn một mục:
 **Vì sao chọn quy trình này:** <lý do, nối với chỗ tắc>
 **Giao cho vai:** <tên vai>
 **Kết luận:** Đạt / Chưa đạt — <kẹt ở bước nào>
+```
+
+Đầu mỗi vòng thì thêm một mục vòng, đứng trước ba mục tháng của nó:
+
+```markdown
+## Vòng <N> — khâu <tên khâu đang tắc> *(mở ngày <ngày>)*
+
+| Hai số gốc của vòng | Đầu vòng | Tái khám |
+|---|---|---|
+| Giờ/tuần bạn đích thân bỏ vào khâu này | | |
+| <tên số kinh doanh của khâu> | | |
+
+**Bản khám dựa vào:** <ngày khám>
+**Kết luận tái khám:** <khâu gốc hết đỏ chưa — và nếu chưa thì vì chưa làm, làm mà không ăn thua, hay chẩn nhầm>
 ```
 
 ---
