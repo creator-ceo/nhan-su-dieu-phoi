@@ -200,9 +200,9 @@ Vì sao dứt khoát: hai bộ khám là **hai kết quả khác nhau cho cùng 
 
 **Mục tiêu do người dùng tự đặt.** Không áp mốc phần trăm, không có "mức chuẩn" nào. Được hỏi lại đúng một câu cho chắc nó là mục tiêu thật: *"Với số giờ mỗi ngày bạn có, ba tháng tới được con số này không?"* — rồi họ chốt.
 
-**Hẹn ngày tái khám.** Mặc định ba tháng tính từ hôm nay. Ghi thành **ngày cụ thể** *(ngày/tháng/năm)*, không ghi *"ba tháng nữa"* — ba tháng nữa tính từ hôm nào thì hai tuần sau không ai nhớ.
+**Hẹn ngày tái khám.** Mặc định **90 ngày** tính từ hôm nay. Ghi thành **ngày cụ thể** *(ngày/tháng/năm)*, không ghi *"90 ngày nữa"* — 90 ngày tính từ hôm nào thì hai tuần sau không ai nhớ.
 
-📱 **Khuyên họ đặt một lời nhắc trên lịch điện thoại ngay lúc này**, đúng ngày tái khám. Vai này chỉ nhắc được khi được mở; quên mở ba tuần thì lời nhắc trên điện thoại là thứ duy nhất còn gọi họ quay lại.
+📅 **Lịch nhắc tạo ở Việc 3**, ngay khi chốt xong khung ngày — một file gồm cả ngày tái khám lẫn khung giờ mỗi ngày. Vai này chỉ nhắc được khi được mở; quên mở ba tuần thì chuông trên điện thoại là thứ duy nhất còn gọi họ quay lại.
 
 **Ghi ngay qua `/nap-kho`, trước khi làm gì khác.** Để lúc tái khám mới hỏi lại số đầu thì người ta chỉ nhớ áng chừng, và con số nhớ lại luôn đẹp hơn con số đo thật. **Không bỏ qua bước này dù người dùng muốn làm nhanh.**
 
@@ -215,6 +215,31 @@ Cùng người dùng lập ra **mỗi ngày làm gì** để chữa xong trong b
 **Lớp 2 — Việc cụ thể của 7 ngày tới.** Mỗi ngày **một việc**, làm xong được trong khung đó, và ra một thứ nhìn thấy được. Hết 7 ngày thì lập tiếp 7 ngày sau, dựa trên cái đã xong thật.
 
 🚫 **Đừng viết sẵn 90 ngày, ngày nào việc nấy.** Viết được, nhưng nó sai từ tuần thứ hai — và người ta bỏ luôn cả bản kế hoạch khi thấy mình trễ so với nó.
+
+### 📅 Đặt lịch nhắc — ngay khi chốt khung ngày
+
+Chạy trong thư mục bộ não của họ, thay đúng ba chỗ trong ngoặc nhọn:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/skills/dieu-hanh/lich/tao-lich.mjs" --khau "<tên khâu>" --khung <HH:MM-HH:MM> --tai-kham <YYYY-MM-DD>
+```
+
+`--tai-kham` lấy **đúng ngày đã hẹn ở Việc 2**, đừng để lệnh tự tính lại — hai chỗ ghi hai ngày là sớm muộn lệch nhau.
+
+Lệnh ra file `lich-nhac/hanh-trinh-<ngày>.ics` gồm hai thứ: **ngày tái khám** *(chuông trước 7 ngày và đúng giờ)* và **khung giờ mỗi ngày** lặp tới hôm trước ngày tái khám *(chuông trước 10 phút)*. Lệnh in kèm hai link Google Calendar.
+
+Chỉ họ cách thêm vào lịch, theo máy họ dùng:
+
+| Họ dùng | Làm thế nào |
+|---|---|
+| Mac · Outlook · lịch Windows | Mở file `.ics` — lịch tự hỏi có thêm không |
+| iPhone | Gửi file đó cho chính mình qua email hoặc AirDrop, rồi bấm vào |
+| Google Calendar | Bấm hai link lệnh vừa in ra, mỗi link bấm **Lưu** |
+| Android | Bấm hai link — mở thẳng file `.ics` trên Android không phải máy nào cũng được |
+
+⚠️ **Thêm xong thì mở sự kiện ra xem có chuông không.** Có ứng dụng lịch bỏ qua chuông trong file và dùng chuông mặc định của máy. Không thấy chuông thì bật tay — mất ba mươi giây, đỡ cả một lần tái khám bị quên.
+
+🚫 **Đừng tự gõ file lịch.** File sai một chút là lịch từ chối im lặng, hoặc nhập được mà mất chuông — không có lỗi nào hiện ra, người dùng chỉ là không được nhắc. Luôn để lệnh trên sinh ra.
 
 **Thứ tự đổ việc vào các ngày:**
 
@@ -299,7 +324,7 @@ Khuôn một hành trình:
 
 **Bản khám dựa vào:** <ngày khám> · **Nhánh:** A / B
 **Đơn:** giảm đau — <việc bảy ngày> · tận gốc — <…>
-**Khung ngày:** <giờ nào, bao lâu, ở đâu>
+**Khung ngày:** <giờ nào, bao lâu, ở đâu> · **Lịch nhắc:** <đã thêm vào lịch nào / chưa>
 
 ### Quy trình đã chữa
 
