@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "dieu-phoi",
   "displayName": "Nhân sự Điều phối",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Vai Điều phối trong đội nhân sự A.I — bánh xe cuộc đời, khám nút thắt kinh doanh, rồi điều hành một hành trình chữa 90 ngày: chốt con số và mục tiêu của khâu, mỗi tháng chữa một quy trình (việc mỗi ngày, nghiệm thu cuối tháng), hết 90 ngày gọi tái khám. Máy giữ chỗ bài khám: nhả đúng một ô mỗi lượt nên AI không đổ cả bài ra, không nhảy cóc, không tự chấm.",
   "author": {
     "name": "Tô Hải Đoàn"
