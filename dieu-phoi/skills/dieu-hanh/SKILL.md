@@ -89,11 +89,13 @@ Khác nhau ở **đối tượng**, không ở cách làm:
 | 3. Đóng gói | Viết thứ vừa làm ra thành các bước | Viết đúng cách đang làm ra thành các bước |
 | 4. Tối ưu | Soi bản vừa viết, ghi chỗ phí | Soi bản vừa viết, ghi chỗ phí |
 | 5. Đơn giản | Bỏ bước thừa vừa thấy | Bỏ bước thừa vừa thấy |
-| 6. Tự động | Giao cho A.I | Giao cho A.I |
+| 6. Tự động | Giao cho A.I, hoặc cho người khác | Giao cho A.I, hoặc cho người khác |
 
 Nói cách khác: Nhánh A **đẻ ra** một quy trình rồi mới tự động hoá nó. Nhánh B **gỡ** một quy trình đã có. Cùng năm bước chữa, ngược chiều xuất phát.
 
 ⚠️ **Đóng gói đứng ngay sau làm thật, không dời xuống cuối.** Chưa viết ra thì không có gì để soi chỗ phí, và tối ưu một thứ còn nằm trong đầu chỉ là tối ưu bằng cảm giác.
+
+✅ **Tự động một phần cũng tính.** Không bắt buộc máy làm 100% mới được coi là xong bước 6 — giao bớt cho người khác, hay để máy làm vài bước còn bạn bấm nút cuối, đều là đã nhích. Đích vẫn là việc tự chạy không cần bạn, nhưng tự động một nửa là một nấc thật, không phải thất bại.
 
 ---
 
@@ -214,7 +216,7 @@ Thứ tự **bên trong** tuần mới là thứ giữ: viết ra trước, soi 
 Đo lại đúng hai số đã chốt ở Việc 2, rồi kết luận **một trong hai**, không có mức giữa:
 
 - **Đạt** — quy trình chạy không cần tay, có bằng chứng. Phép thử: *tắt máy đi ngủ thì nó còn chạy không?* Ghi thành tài sản.
-- **Chưa đạt** — nói rõ kẹt ở bước nào trong năm bước chữa *(làm thật · đóng gói · tối ưu · đơn giản · tự động)*, và tháng sau làm tiếp hay đổi quy trình khác.
+- **Chưa đạt** — nói rõ đã tự động được tới đâu *(vd: máy làm 3 trong 5 bước)* và kẹt ở bước nào trong năm bước chữa *(làm thật · đóng gói · tối ưu · đơn giản · tự động)*, và tháng sau làm tiếp hay đổi quy trình khác.
 
 🚫 **Không kết luận "xong" bằng cảm giác.** Không có hai số và không có bằng chứng chạy thật thì là chưa đạt, dù người dùng thấy hài lòng.
 
