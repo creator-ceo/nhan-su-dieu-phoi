@@ -4,7 +4,7 @@
 
 Một plugin Claude Code, ba lệnh. Nó trả lời đúng câu hỏi mà một bộ não đầy dữ liệu vẫn không tự trả lời được: **tháng này tôi nên làm gì trước.**
 
-> **Phiên bản:** `1.3.0` · 2026-09-23 · giấy phép MIT
+> **Phiên bản:** `1.4.0` · 2026-09-23 · giấy phép MIT
 
 ---
 
@@ -24,15 +24,18 @@ claude plugin install dieu-phoi
 |---|---|---|
 | `/banh-xe-cuoc-doi` | Chấm 8 khía cạnh cuộc sống → kế hoạch dài hạn + 90 ngày. **Nạp con người**, không nạp dữ liệu việc | 3 tháng |
 | `/kham-benh` | Soi bạn đang tắc ở khâu nào — ~22 ô, kê đơn hai ngăn | 3 tháng |
-| `/dieu-hanh` | Đọc bản khám gần nhất → chốt **một** việc cho tháng → nghiệm thu bằng hai con số | mỗi tháng |
+| `/dieu-hanh` | Đọc bản khám → chốt con số và mục tiêu → cùng bạn lập **việc mỗi ngày** → tới hạn thì gọi tái khám | suốt ba tháng |
 
-### Ba lệnh ghép thành một vòng ba tháng
+### Ba lệnh ghép thành một hành trình chữa ba tháng
 
 ```
-khám  →  chữa tháng 1  →  chữa tháng 2  →  chữa tháng 3  →  tái khám  →  vòng mới
+khám  →  chốt số và mục tiêu  →  việc mỗi ngày, suốt ba tháng  →  tái khám  →  hành trình mới
 ```
 
-Khám ra khâu đang tắc và chốt hai con số gốc. Mỗi tháng sau đó chữa **đúng một** quy trình, đi hết năm bước: **làm thật → đóng gói → tối ưu → đơn giản → tự động**. Hết tháng thứ ba thì khám lại để xem khâu đó hết tắc chưa — đo lại đúng hai con số cũ, không đo bằng cảm giác.
+1. **Khám** — `/kham-benh` chỉ ra khâu đang tắc và kê đơn.
+2. **Chốt số** — `/dieu-hanh` hỏi con số hiện tại *(giờ bạn tự tay bỏ vào khâu đó · một con số kinh doanh của khâu)*, bạn tự đặt mục tiêu sau ba tháng, và hẹn một ngày tái khám cụ thể.
+3. **Việc mỗi ngày** — cùng bạn lập khung giờ cố định mỗi ngày và việc cụ thể cho từng ngày, lập lại mỗi tuần. Mỗi quy trình đi đủ năm bước: **làm thật → đóng gói → tối ưu → đơn giản → tự động**.
+4. **Tái khám** — tới ngày hẹn, `/dieu-hanh` dừng mọi việc khác và mời bạn khám lại. Đo lại đúng những con số cũ, đặt cạnh mục tiêu — không đo bằng cảm giác.
 
 Cố định là **cái nhịp**. Khâu nào được chữa thì tuỳ bản khám của từng người.
 

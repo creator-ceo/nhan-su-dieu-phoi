@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Vai Điều phối trong đội nhân sự A.I của Tô Hải Đoàn — cài rời, chạy trên bộ não thứ 2 sẵn có",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "repository": "https://github.com/creator-ceo/nhan-su-dieu-phoi"
   },
   "plugins": [
@@ -14,7 +14,7 @@
       "name": "dieu-phoi",
       "source": "./dieu-phoi",
       "strict": false,
-      "description": "Ba lệnh: /banh-xe-cuoc-doi chấm 8 khía cạnh ra kế hoạch dài-ngắn hạn · /kham-benh soi bạn đang tắc ở khâu nào rồi kê đơn hai ngăn · /dieu-hanh đọc bản khám gần nhất, chốt một việc cho tháng, nghiệm thu bằng hai con số."
+      "description": "Ba lệnh: /banh-xe-cuoc-doi chấm 8 khía cạnh ra kế hoạch dài-ngắn hạn · /kham-benh soi bạn đang tắc ở khâu nào rồi kê đơn hai ngăn · /dieu-hanh đọc bản khám, chốt con số và mục tiêu, cùng bạn lập việc mỗi ngày trong ba tháng, tới hạn thì gọi tái khám."
     }
   ]
 }
