@@ -4,7 +4,7 @@
 
 Một plugin Claude Code, ba lệnh. Nó trả lời đúng câu hỏi mà một bộ não đầy dữ liệu vẫn không tự trả lời được: **tháng này tôi nên làm gì trước.**
 
-> **Phiên bản:** `1.5.0` · 2026-09-23 · giấy phép MIT
+> **Phiên bản:** `1.6.0` · 2026-09-23 · giấy phép MIT
 
 ---
 
@@ -24,17 +24,17 @@ claude plugin install dieu-phoi
 |---|---|---|
 | `/banh-xe-cuoc-doi` | Chấm 8 khía cạnh cuộc sống → kế hoạch dài hạn + 90 ngày. **Nạp con người**, không nạp dữ liệu việc | 3 tháng |
 | `/kham-benh` | Soi bạn đang tắc ở khâu nào — ~22 ô, kê đơn hai ngăn | 3 tháng |
-| `/dieu-hanh` | Đọc bản khám → chốt con số và mục tiêu → cùng bạn lập **việc mỗi ngày** → tới hạn thì gọi tái khám | suốt ba tháng |
+| `/dieu-hanh` | Đọc bản khám → chốt con số và mục tiêu của khâu → mỗi tháng chữa **một quy trình** (việc mỗi ngày, cuối tháng nghiệm thu) → hết 90 ngày gọi tái khám | suốt 90 ngày |
 
 ### Ba lệnh ghép thành một hành trình chữa ba tháng
 
 ```
-khám  →  chốt số và mục tiêu  →  việc mỗi ngày, suốt ba tháng  →  tái khám  →  hành trình mới
+khám  →  chốt số của khâu  →  tháng 1: một quy trình  →  tháng 2: một quy trình  →  tháng 3: một quy trình  →  tái khám
 ```
 
 1. **Khám** — `/kham-benh` chỉ ra khâu đang tắc và kê đơn.
 2. **Chốt số** — `/dieu-hanh` hỏi con số hiện tại *(giờ bạn tự tay bỏ vào khâu đó · một con số kinh doanh của khâu)*, bạn tự đặt mục tiêu, và hẹn ngày tái khám — mặc định 90 ngày sau.
-3. **Việc mỗi ngày** — cùng bạn lập khung giờ cố định mỗi ngày và việc cụ thể cho từng ngày, lập lại mỗi tuần. Tạo sẵn **file lịch nhắc** cho điện thoại: chuông mỗi ngày trước khung giờ, và chuông trước ngày tái khám 7 ngày. Mỗi quy trình đi đủ năm bước: **làm thật → đóng gói → tối ưu → đơn giản → tự động**.
+3. **Mỗi tháng một quy trình** — trong đúng khâu đó, chọn một quy trình để chữa. Cùng bạn lập khung giờ cố định mỗi ngày và việc cụ thể cho từng ngày, lập lại mỗi tuần; cuối tháng nghiệm thu quy trình đó đã tự chạy chưa. Tạo sẵn **file lịch nhắc** cho điện thoại: chuông mỗi ngày trước khung giờ, chuông trước mỗi lần nghiệm thu tháng, và chuông trước ngày tái khám 7 ngày. Mỗi quy trình đi đủ năm bước: **làm thật → đóng gói → tối ưu → đơn giản → tự động**.
 4. **Tái khám** — tới ngày hẹn, `/dieu-hanh` dừng mọi việc khác và mời bạn khám lại. Đo lại đúng những con số cũ, đặt cạnh mục tiêu — không đo bằng cảm giác.
 
 Cố định là **cái nhịp**. Khâu nào được chữa thì tuỳ bản khám của từng người.

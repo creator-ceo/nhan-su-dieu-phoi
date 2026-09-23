@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * tao-lich.mjs — sinh FILE LỊCH (.ics) + link Google Calendar cho một hành trình chữa 90 ngày.
+ * tao-lich.mjs — sinh FILE LỊCH (.ics) + link Google Calendar cho một hành trình chữa 90 ngày:
+ * khung giờ mỗi ngày · nghiệm thu tháng (ngày 30, 60) · tái khám (ngày 90).
  *
  *   node tao-lich.mjs --khau "Thu hút" --khung 06:00-07:00
  *   node tao-lich.mjs --khau "Thu hút" --bat-dau 2026-09-24 --tai-kham 2026-12-23 --khung 21:00-21:45
@@ -104,7 +105,7 @@ const suKien = [];
 const tkBatDau = utc(taiKham, gioNhac);
 const tkKetThuc = utc(taiKham, gioNhac, 30);
 const tkTen = `Tái khám — khâu ${khau}`;
-const tkMoTa = `Hết hành trình ${soNgay} ngày chữa khâu ${khau}.\nMở Claude, gõ /dieu-hanh để tái khám.\nMang theo con số thật: giờ mỗi tuần và giờ mỗi ngày bạn tự tay bỏ vào khâu này, và con số kinh doanh của khâu.`;
+const tkMoTa = `Hết hành trình ${soNgay} ngày chữa khâu ${khau}.\nMở Claude, gõ /dieu-hanh: nghiệm thu quy trình của tháng cuối, rồi tái khám.\nMang theo con số thật: giờ mỗi tuần và giờ mỗi ngày bạn tự tay bỏ vào khâu này, và con số kinh doanh của khâu.`;
 suKien.push([
   'BEGIN:VEVENT',
   `UID:tai-kham-${batDau}-${ma}@nhan-su-dieu-phoi`,
@@ -117,6 +118,30 @@ suKien.push([
   'BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${thoatChu('Hôm nay là ngày tái khám')}`, 'TRIGGER:PT0S', 'END:VALARM',
   'END:VEVENT',
 ]);
+
+/* Nghiệm thu tháng: mỗi 30 ngày tính từ ngày bắt đầu, trước ngày tái khám. Ngày tái khám đã gánh
+   nghiệm thu tháng cuối nên không tạo trùng. Một sự kiện lặp, không phải nhiều sự kiện rời —
+   để người dùng Google chỉ phải bấm một link cho cả hai lần. */
+const soLanNghiemThu = Math.floor((soNgay - 1) / 30);
+const ntBatDau = utc(cong(batDau, 30), gioNhac);
+const ntKetThuc = utc(cong(batDau, 30), gioNhac, 30);
+const ntTen = `Nghiệm thu tháng — chữa khâu ${khau}`;
+const ntMoTa = `Hết một tháng của hành trình chữa khâu ${khau}.\nMở Claude, gõ /dieu-hanh để nghiệm thu quy trình của tháng này, rồi chọn quy trình tháng sau.`;
+if (soLanNghiemThu > 0) {
+  suKien.push([
+    'BEGIN:VEVENT',
+    `UID:nghiem-thu-${batDau}-${ma}@nhan-su-dieu-phoi`,
+    `DTSTAMP:${dauTem}`,
+    `DTSTART:${ntBatDau}`,
+    `DTEND:${ntKetThuc}`,
+    `RRULE:FREQ=DAILY;INTERVAL=30;COUNT=${soLanNghiemThu}`,
+    `SUMMARY:${thoatChu(ntTen)}`,
+    `DESCRIPTION:${thoatChu(ntMoTa)}`,
+    'BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${thoatChu('Mai là ngày nghiệm thu tháng')}`, 'TRIGGER:-P1D', 'END:VALARM',
+    'BEGIN:VALARM', 'ACTION:DISPLAY', `DESCRIPTION:${thoatChu('Hôm nay nghiệm thu quy trình của tháng')}`, 'TRIGGER:PT0S', 'END:VALARM',
+    'END:VEVENT',
+  ]);
+}
 
 let khBatDau, khKetThuc, khTen, khMoTa;
 if (khung) {
@@ -157,8 +182,10 @@ const link = (ten, tu, den, moTa, lap) => {
 
 console.log(`✓ Đã tạo file lịch: ${path.relative(process.cwd(), tep) || tep}`);
 console.log(`  · Tái khám: ${dmy(taiKham)} lúc ${gioNhac} — chuông nhắc trước 7 ngày và đúng giờ đó`);
+if (soLanNghiemThu > 0) console.log(`  · Nghiệm thu tháng: ${Array.from({ length: soLanNghiemThu }, (_, i) => dmy(cong(batDau, 30 * (i + 1)))).join(' · ')} lúc ${gioNhac} — chuông nhắc trước 1 ngày và đúng giờ đó`);
 if (khung) console.log(`  · Việc mỗi ngày: ${khung.tu}–${khung.den}, lặp ${soNgay} ngày từ ${dmy(batDau)} — chuông nhắc trước 10 phút`);
 console.log('');
 console.log('Link Google Calendar (bấm là mở sẵn sự kiện, chỉ cần bấm Lưu):');
-console.log(`  · Tái khám:       ${link(tkTen, tkBatDau, tkKetThuc, tkMoTa)}`);
-if (khung) console.log(`  · Việc mỗi ngày:  ${link(khTen, khBatDau, khKetThuc, khMoTa, `RRULE:FREQ=DAILY;COUNT=${soNgay}`)}`);
+console.log(`  · Tái khám:         ${link(tkTen, tkBatDau, tkKetThuc, tkMoTa)}`);
+if (soLanNghiemThu > 0) console.log(`  · Nghiệm thu tháng: ${link(ntTen, ntBatDau, ntKetThuc, ntMoTa, `RRULE:FREQ=DAILY;INTERVAL=30;COUNT=${soLanNghiemThu}`)}`);
+if (khung) console.log(`  · Việc mỗi ngày:    ${link(khTen, khBatDau, khKetThuc, khMoTa, `RRULE:FREQ=DAILY;COUNT=${soNgay}`)}`);
